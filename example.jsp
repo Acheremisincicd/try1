@@ -1,10 +1,10 @@
 <%@ page import="java.sql.*" %>
 <%
   // Read RDS connection information from the environment
-  String dbName = "RDS_DB_NAME";
-  String userName = "RDS_USERNAME";
-  String password = "RDS_PASSWORD";
-  String hostname = "RDS_HOSTNAME";
+  String dbName = RDS_DB_NAME;
+  String userName = RDS_USERNAME;
+  String password = RDS_PASSWORD;
+  String hostname = RDS_HOSTNAME;
   String port = "RDS_PORT";
   String jdbcUrl = "jdbc:mysql://" + hostname + ":" +
     port + "/" + dbName + "?user=" + userName + "&password=" + password;
