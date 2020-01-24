@@ -1,0 +1,30 @@
+- name: Wait for Jenkins to start up
+  uri:
+    url: "{{ jenkins_url }}"
+    validate_certs: no
+    status_code: 200
+    timeout: 5
+  register: jenkins_service_status
+  retries: 60
+  delay: 5
+  until: >
+    'status' in jenkins_service_status and
+    jenkins_service_status['status'] == 200
+
+- name: Copy jcac configurations
+  template:
+    src: '{{ item.src }}'
+    dest: "{{ jenkins_home }}/{{ item.path }}"
+    mode: '{{ item.mode }}'
+  with_filetree: ../config/
+  when: item.state == 'file'
+
+- name: Reload configuration
+  jenkins_script:
+    user: "admin"
+    password: "{{ jenkins_initial_user_password }}"
+    script: "
+      import io.jenkins.plugins.casc.ConfigurationAsCode;
+      ConfigurationAsCode.get().configure('{{ jenkins_home }}')"
+    validate_certs: no
+    url: "{{ jenkins_url }}"

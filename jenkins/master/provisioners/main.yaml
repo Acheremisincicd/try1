@@ -1,0 +1,19 @@
+- hosts: jenkins-master
+  become: true
+  become_user: root
+  vars_files:
+    - "{{ lookup('env', 'PWD') }}/vault.yml"
+    - ./vars.yaml
+
+  tasks:
+  - name: Install Jenkins
+    import_tasks: ./tasks/install_jenkins.yaml
+
+  - name: Configure jenkins for https use
+    import_tasks: ./tasks/use_https.yaml
+
+  - name: Install plugins
+    import_tasks: ./tasks/install_plugins.yaml
+
+  - name: Apply initial config
+    import_tasks: ./tasks/apply_initial_jcac_config.yaml

@@ -1,0 +1,51 @@
+---
+
+- hosts: all
+  become: yes
+  become_user: root
+  vars_files:
+    - ./var.yml
+  tasks:
+
+    - name: Create a ext4 filesystem on /dev/xvdb
+      filesystem:
+        fstype: ext4
+        dev: /dev/xvdb
+
+    - name: Ensure backup directory exist
+      file:
+        path: /var_backup
+        state: directory
+
+    - name: Backup /var directory
+      shell:
+        cmd: cp -ax * /var_backup
+        chdir: /var
+
+    - name: Ensure separated ebs is mounted on /var
+      mount:
+        path: /var
+        src: /dev/xvdb
+        state: mounted
+        fstype: ext4
+
+    - name: Restore /var directory content
+      shell:
+        cmd: cp -ax * /var
+        chdir: /var_backup
+
+    - name: Ensure /var backup is removed
+      file:
+        path: /var_backup
+        state: absent
+
+    - name: install the latest version unzip
+      yum:
+        name: unzip
+        state: latest
+    
+    - name: Packer installation 
+      unarchive:
+        src: "{{ packer_link }}"
+        dest: /usr/local/bin
+        remote_src: yes
