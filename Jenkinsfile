@@ -1,4 +1,4 @@
-node {
+node('packer_node') {
  withEnv(["ENV=DEV", "STAGE=STABLE"]) {
    stage('Git clone') {
       checkout(
