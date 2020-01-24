@@ -18,7 +18,7 @@
               "owners": ["self"]
             },
             "subnet_id": "subnet-0b2ea6fd82fee5cd4",
-            "security_group_id": "sg-0b07933e87e75a33e",
+            "security_group_id": "sg-03a2d35951e940dd6",
             "instance_type": "t2.micro",
             "ssh_username": "centos",
             "ami_name": "packer-slave-{{user `env`}}-{{user `stage`}}",
