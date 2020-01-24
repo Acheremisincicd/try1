@@ -1,4 +1,4 @@
-node (label: 'aws') {
+node (label: 'packer_node') {
  withEnv(["ENV=DEV", "STAGE=STABLE"]) {
    stage('Git clone') {
       checkout(
