@@ -8,7 +8,7 @@ node('packer_node') {
                doGenerateSubmoduleConfigurations: false, 
                userRemoteConfigs: [
                   [
-                     /*credentialsId: "git",*/
+                     credentialsId: "github",
                     url: "https://github.com/Acheremisincicd/try1.git"
                   ]
                ]
