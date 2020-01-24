@@ -8,8 +8,8 @@ node (label: 'aws') {
                doGenerateSubmoduleConfigurations: false, 
                userRemoteConfigs: [
                   [
-                     credentialsId: "git", 
-                    url: "git@git.epam.com:Artem_Cheremisin/packer_build_test.git"
+                     /*credentialsId: "git",*/
+                    url: "https://github.com/Acheremisincicd/try1.git"
                   ]
                ]
          ]
