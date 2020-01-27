@@ -40,7 +40,7 @@
         state: absent
 
     - name: Ensure that necessary packages are installed
-      yum: 
+       yum:
         name: 
          - epel-release 
          - git 
