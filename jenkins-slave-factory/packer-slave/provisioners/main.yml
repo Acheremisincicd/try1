@@ -44,6 +44,16 @@
         name: unzip
         state: latest
     
+    - name: install git 
+      yum: 
+        name: git 
+        state: latest
+
+    - name: install ansible
+      yum: 
+        name: ansible
+        state: latest
+
     - name: Packer installation 
       unarchive:
         src: "{{ packer_link }}"
