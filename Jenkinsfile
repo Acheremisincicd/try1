@@ -15,7 +15,7 @@ node(label: 'packer_node') {
          ]
       )
    }
-    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'packer_executor2', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) { 
+    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'packer_executor', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) { 
     sh "packer build jenkins-slave-factory/${slave_ami}/template.json"
         }
     }
