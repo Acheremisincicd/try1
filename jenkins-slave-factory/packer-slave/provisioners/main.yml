@@ -40,12 +40,12 @@
         state: absent
 
     - name: Ensure that necessary packages are installed
-       yum:
-        name: 
-         - epel-release 
-         - git 
-         - ansible
-      state: latest
+      yum:
+        name:
+          - epel-release 
+          - git 
+          - ansible
+        state: latest
 
     - name: Packer installation 
       unarchive:
