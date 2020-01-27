@@ -39,23 +39,16 @@
         path: /var_backup
         state: absent
 
-    - name: install the latest version unzip
-      yum:
-        name: unzip
-        state: latest
-    
-    - name: install git 
+    - name: Ensure that necessary packages are installed
       yum: 
-        name: git 
-        state: latest
-
-    - name: install ansible
-      yum: 
-        name: ansible
-        state: latest
+        name: 
+          - epel-release 
+          - git 
+          - ansible
+      state: latest
 
     - name: Packer installation 
       unarchive:
-        src: "{{ packer_link }}"
+        src: https://releases.hashicorp.com/packer/1.5.1/packer_1.5.1_linux_amd64.zip
         dest: /usr/local/bin
         remote_src: yes
