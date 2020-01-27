@@ -13,7 +13,7 @@
             "region":"eu-central-1",
             "source_ami_filter": {
               "filters": {
-                "name": "rdua-doaas-base-ami-{{user `env`}}-{{user `stage`}}"
+                "name": "packer-slave--"
               },
               "owners": ["self"]
             },
