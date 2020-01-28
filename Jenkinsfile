@@ -13,7 +13,7 @@ pipeline {
                                 ])
                             }
                         }
-                    }
+                    
                 stage('Building Packer AMI') {
                     steps {
                         withEnv(["ENV=DEV", "STAGE=STABLE"]){
@@ -24,6 +24,7 @@ pipeline {
                                 secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
                                     // $slave_ami is folder in git which should contain packer template 
                                     sh "packer build jenkins-slave-factory/${slave_ami}/template.json"
+                    }
                 }
             }
         }
