@@ -1,6 +1,7 @@
 pipeline {
     agent {
-        packer-executor {
+        node {
+             label 'packer-executor'
             stages {
                 stage('Building Packer AMI') {
                     steps {
