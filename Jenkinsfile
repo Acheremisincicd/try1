@@ -1,5 +1,8 @@
 pipeline {
     agent{ label 'packer_node' }
+        parameters {
+        string(name: 'slave_ami', defaultValue: ' ', description: 'slave_ami is the folder in git which should contains packer template')
+        }
             stages {
                 stage('git clone') {
                     steps {
@@ -24,11 +27,15 @@ pipeline {
                                 credentialsId: 'packer-executor', 
                                 secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) 
                                 {
-                                    // $slave_ami is folder in git which should contain packer template 
                                     sh "packer build jenkins-slave-factory/${slave_ami}/template.json"
                     }
                 }
             }
         }
     }
-}
+    post {
+        always {
+            cleanWs()
+        }
+    }
+} 
