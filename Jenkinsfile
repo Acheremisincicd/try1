@@ -6,16 +6,8 @@ pipeline {
             stages {
                 stage('git clone') {
                     steps {
-                        deleteDir()
-                        checkout([
-                            $class: 'GitSCM', 
-                            branches: [[name: '*/master']], 
-                            extensions: [[$class: 'WipeWorkspace']],
-                            userRemoteConfigs:[[
-                                    credentialsId: "github",
-                                    url: "https://github.com/Acheremisincicd/try1.git"]]
-                                ])
-                            }
+                        git url: 'https://github.com/Acheremisincicd/try1.git', branch: 'master',
+                        credentialsId: 'github'
                         }
                 stage('Building Packer AMI') {
                     steps {
