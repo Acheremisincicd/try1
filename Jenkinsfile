@@ -1,19 +1,18 @@
 pipeline {
     agent{ label 'packer_node' }
             stages {
-                stage('git clone') {
-                    steps {
-                        checkout([
-                            $class: 'GitSCM', 
-                            branches: [[name: '*/master']], 
-                            doGenerateSubmoduleConfigurations: false, 
-                            userRemoteConfigs:[[
-                                    credentialsId: "github",
-                                    url: "https://github.com/Acheremisincicd/try1.git"]]
-                                ])
-                            }
-                        }
-                    
+                // stage('git clone') {
+                //     steps {
+                //         checkout([
+                //             $class: 'GitSCM', 
+                //             branches: [[name: '*/master']], 
+                //             doGenerateSubmoduleConfigurations: false, 
+                //             userRemoteConfigs:[[
+                //                     credentialsId: "github",
+                //                     url: "https://github.com/Acheremisincicd/try1.git"]]
+                //                 ])
+                //             }
+                //         }
                 stage('Building Packer AMI') {
                     steps {
                         withEnv(["ENV=DEV", "STAGE=STABLE"]){
