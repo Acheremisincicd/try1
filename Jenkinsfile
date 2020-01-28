@@ -5,7 +5,7 @@ pipeline {
                     steps {
                         checkout([
                             $class: 'GitSCM', 
-                            branches: [[name: '*/develop']], 
+                            branches: [[name: '*/master']], 
                             doGenerateSubmoduleConfigurations: false, 
                             userRemoteConfigs:[[
                                     credentialsId: "github",
