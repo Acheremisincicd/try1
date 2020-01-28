@@ -9,6 +9,7 @@ pipeline {
                         git url: 'https://github.com/Acheremisincicd/try1.git', branch: 'master',
                         credentialsId: 'github'
                         }
+                }
                 stage('Building Packer AMI') {
                     steps {
                         withEnv(["ENV=DEV","STAGE=STABLE"])
