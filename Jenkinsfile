@@ -1,5 +1,5 @@
 pipeline {
-    agent{ label 'packer-executor' }
+    agent{ label 'packer_node' }
         parameters {
         string(name: 'slave_ami', defaultValue: '', description: 'slave_ami is the folder in git which should contains packer template')
         string(name: 'ENV', defaultValue: '', description: '')
