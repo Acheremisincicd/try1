@@ -1,18 +1,24 @@
 pipeline {
-    agent{ label 'packer_node' }
+    agent{ label 'packer-executor' }
         parameters {
-        string(name: 'slave_ami', defaultValue: ' ', description: 'slave_ami is the folder in git which should contains packer template')
+        string(name: 'slave_ami', defaultValue: '', description: 'slave_ami is the folder in git which should contains packer template')
+        string(name: 'ENV', defaultValue: '', description: '')
+        string(name: 'STAGE', defaultValue: '', description: '')
+        string(name: 'PIPELINE_GIT', defaultValue: '', description: 'Branch')
         }
             stages {
-                stage('git clone') {
+                stage('Checkout') {
                     steps {
-                        git url: 'https://github.com/Acheremisincicd/try1.git', branch: 'master',
+                        git(
+                        url: 'https://github.com/Acheremisincicd/try1.git',
+                        branch: "${PIPELINE_GIT}",
                         credentialsId: 'github'
+                        )
                         }
                 }
                 stage('Building Packer AMI') {
                     steps {
-                        withEnv(["ENV=DEV","STAGE=STABLE"])
+                        withEnv(["ENV=${ENV}","STAGE=${STAGE}"])
                          {
                             withCredentials([[
                                 $class: 'AmazonWebServicesCredentialsBinding', 
