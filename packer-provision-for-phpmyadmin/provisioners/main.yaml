@@ -7,6 +7,9 @@
     - name: get sql private ip 
       shell: gcloud sql instances list | awk '{print $6}' | tail -n1
       register: sql_private_ip 
+      
+    - name: configure apache 
+      shell: echo "{{sql_private_ip.stdout}}" > /home/111.txt
 
     - name: update everything
       dnf:
