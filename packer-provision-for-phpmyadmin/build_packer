@@ -1,0 +1,26 @@
+pipeline {
+    agent{ label 'master' }
+    parameters {
+        choice(name: 'ENV', choices: ['DEV', 'QUA', 'QUA2','PROD'], description: 'Pick something')
+    }
+            stages {
+                stage('Checkout') {
+                    steps {
+                        git(
+                        url: 'https://github.com/dawn-foods-digital/b2b-admin-tools.git',
+                        branch: 'phpmyadmin_installation',
+                        credentialsId: 'git'
+                        )
+                        }
+                }
+                stage('Building Packer AMI') {
+                    steps {
+                        withCredentials([file(credentialsId: "${ENV}", variable: 'GC_KEY')]) {
+                            sh("gcloud auth activate-service-account packer-builder@generated-case-286721.iam.gserviceaccount.com --key-file=${GC_KEY}")
+                            sh("packer build packer-provision-for-phpmyadmin/template.json")
+                            }
+                        }
+                    }
+                }
+            }
+            
