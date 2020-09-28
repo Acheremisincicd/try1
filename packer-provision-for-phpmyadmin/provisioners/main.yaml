@@ -3,7 +3,10 @@
   become: true
   become_user: root
   tasks:
-  
+    - name: Copy service account key
+      copy:
+        src: /home/KEY_FOR_GCP.json
+        dest: /home/KEY_FOR_GCP.json
     - name: auth in GCP via gcloud
       shell: gcloud auth activate-service-account packer-builder@generated-case-286721.iam.gserviceaccount.com --key-file=/home/KEY_FOR_GCP.json --project=generated-case-286721
 
