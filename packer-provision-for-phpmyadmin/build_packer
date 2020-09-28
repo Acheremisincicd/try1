@@ -7,9 +7,9 @@ pipeline {
                 stage('Checkout') {
                     steps {
                         git(
-                        url: 'https://github.com/Acheremisincicd/try1.git',
-                        branch: 'packer_new',
-                        credentialsId: 'github'
+                        url: 'https://github.com/dawn-foods-digital/b2b-admin-tools.git',
+                        branch: 'phpmyadmin_installation',
+                        credentialsId: 'git'
                         )
                         }
                 }
@@ -17,7 +17,7 @@ pipeline {
                     steps {
                         withCredentials([file(credentialsId: "${ENV}", variable: 'GC_KEY')]) {
                             sh("gcloud auth activate-service-account packer-builder@generated-case-286721.iam.gserviceaccount.com --key-file=${GC_KEY}")
-                            sh("packer build packer/template.json")
+                            sh("packer build packer-provision-for-phpmyadmin/template.json")
                             }
                         }
                     }

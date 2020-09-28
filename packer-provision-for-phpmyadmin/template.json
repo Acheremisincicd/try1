@@ -2,12 +2,10 @@
     "builders": [
       {
         "type": "googlecompute",
-        "project_id": " ",
+        "project_id": "PASTE_ID",
         "source_image_family": "centos-8",
-        "ssh_username": " ",
-        "zone": "",
-        "disk_size" : "",
-        "image_name": "centos8-with-phpmyadmin"
+        "zone": "PASTE_ZONE",
+        "image_name": "PASTE_IMAGE_NAME"
       }
     ],
     "provisioners": [
