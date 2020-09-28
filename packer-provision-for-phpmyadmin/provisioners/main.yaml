@@ -5,7 +5,7 @@
   tasks:
   
     - name: auth in GCP via gcloud
-      shell: gcloud auth activate-service-account packer-builder@generated-case-286721.iam.gserviceaccount.com --key-file=/home/KEY_FOR_GCP --project=generated-case-286721
+      shell: gcloud auth activate-service-account packer-builder@generated-case-286721.iam.gserviceaccount.com --key-file=/home/KEY_FOR_GCP.json --project=generated-case-286721
 
     - name: get sql private ip 
       shell: gcloud sql instances list | awk '{print $6}' | tail -n1
