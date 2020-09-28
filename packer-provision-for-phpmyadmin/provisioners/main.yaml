@@ -68,7 +68,7 @@
       lineinfile:
         path: /var/www/html/phpMyAdmin/config.inc.php
         insertafter: (\$cfg\[\'Servers\'\]\[\$i\]\[\'AllowNoPassword\'\]).*;
-        line: "$cfg['Servers'][$i]['host'] = '{{sql_private_ip.stdout}}:3306';"
+        line: $cfg['Servers'][$i]['host'] = '{{sql_private_ip.stdout}}:3306';
       
     - name: open port 80/tcp
       firewalld:
