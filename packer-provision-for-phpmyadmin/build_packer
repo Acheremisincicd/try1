@@ -1,0 +1,26 @@
+pipeline {
+    agent{ label 'master' }
+    parameters {
+        choice(name: 'ENV', choices: ['DEV', 'QUA', 'QUA2','PROD'], description: 'Pick something')
+    }
+            stages {
+                stage('Checkout') {
+                    steps {
+                        git(
+                        url: 'https://github.com/Acheremisincicd/try1.git',
+                        branch: 'packer_new',
+                        credentialsId: 'github'
+                        )
+                        }
+                }
+                stage('Building Packer AMI') {
+                    steps {
+                        withCredentials([file(credentialsId: "${ENV}", variable: 'GC_KEY')]) {
+                            sh("gcloud auth activate-service-account packer-builder@generated-case-286721.iam.gserviceaccount.com --key-file=${GC_KEY}")
+                            sh("packer build packer/template.json")
+                            }
+                        }
+                    }
+                }
+            }
+            
