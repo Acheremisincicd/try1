@@ -5,6 +5,7 @@
         "project_id": "PASTE_ID",
         "source_image_family": "centos-8",
         "zone": "PASTE_ZONE",
+          "ssh_username": "packer"
         "image_name": "PASTE_IMAGE_NAME"
       }
     ],
