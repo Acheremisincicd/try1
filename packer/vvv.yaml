@@ -1,0 +1,23 @@
+- name: test
+  hosts: localhost
+  become: true
+  become_user: root
+  tasks:
+
+    - name: Copy service account key
+      shell : ls -la /home | awk '{print $9}' | tail -n1
+      register: varis
+         
+    
+
+    - name: Replace before the expression till the begin of the file (requires Ansible >= 2.4)
+      lineinfile:
+        path: /home/ec2-user/packer/provisioners/files/config.inc.php
+        regexp: (\$cfg\[\'Servers\'\]\[\$i\]\[\'host\'\]).*
+        state: absent
+
+    - name:
+      lineinfile:
+        path: /home/ec2-user/packer/provisioners/files/config.inc.php
+        insertafter: (\$cfg\[\'Servers\'\]\[\$i\]\[\'AllowNoPassword\'\]).*;
+        line: "$cfg['Servers'][$i]['host'] = '{{varis.stdout}}';"
